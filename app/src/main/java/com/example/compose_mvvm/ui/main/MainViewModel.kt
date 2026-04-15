@@ -1,10 +1,9 @@
-package com.example.compose.ui.main
+package com.example.compose_mvvm.ui.main
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.compose.data.repository.MainRepository
+import com.example.compose_mvvm.data.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

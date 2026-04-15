@@ -1,6 +1,6 @@
-package com.example.compose.di
+package com.example.compose_mvvm.di
 
-import com.example.compose.data.remote.FactCatApi
+import com.example.compose_mvvm.data.remote.FactCatApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

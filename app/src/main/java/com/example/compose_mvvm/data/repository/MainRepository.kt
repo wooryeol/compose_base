@@ -1,7 +1,7 @@
-package com.example.compose.data.repository
+package com.example.compose_mvvm.data.repository
 
-import com.example.compose.data.remote.FactCatApi
-import com.example.compose.data.remote.FactCatResponse
+import com.example.compose_mvvm.data.remote.FactCatApi
+import com.example.compose_mvvm.data.remote.FactCatResponse
 import javax.inject.Inject
 
 class MainRepository @Inject constructor(

@@ -1,4 +1,4 @@
-package com.example.compose.data.remote
+package com.example.compose_mvvm.data.remote
 
 import retrofit2.http.GET
 

@@ -1,4 +1,4 @@
-package com.example.compose
+package com.example.compose_mvvm
 
 import org.junit.Test
 

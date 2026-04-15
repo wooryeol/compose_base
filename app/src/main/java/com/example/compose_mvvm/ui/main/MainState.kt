@@ -1,6 +1,6 @@
-package com.example.compose.ui.main
+package com.example.compose_mvvm.ui.main
 
-import com.example.compose.data.remote.FactCatResponse
+import com.example.compose_mvvm.data.remote.FactCatResponse
 
 // 화면의 모든 상태를 하나의 데이터 클래스로 정리 -> 관리 단순화
 data class MainUiState (

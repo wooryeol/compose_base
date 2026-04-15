@@ -1,15 +1,15 @@
 package com.example.compose.data.repository
 
-import com.example.compose.data.remote.ProfileApi
-import com.example.compose.data.remote.ProfileResponse
+import com.example.compose.data.remote.FactCatApi
+import com.example.compose.data.remote.FactCatResponse
 import javax.inject.Inject
 
 class MainRepository @Inject constructor(
-    private val api: ProfileApi
+    private val api: FactCatApi
 ) {
-    suspend fun getProfileData(): Result<ProfileResponse> {
+    suspend fun getFactCatData(): Result<FactCatResponse> {
         return try {
-            val response = api.getProfile()
+            val response = api.getFactCat()
             Result.success(response)
         } catch (e: Exception) {
             Result.failure(e)

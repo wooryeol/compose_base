@@ -26,10 +26,10 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
 
-            val result = repository.getProfileData()
+            val result = repository.getFactCatData()
 
                 result.onSuccess { data ->
-                    _uiState.update { it.copy(profileData = data, isLoading = false) }
+                    _uiState.update { it.copy(factCatData = data, isLoading = false) }
                 }
                 result.onFailure { error ->
                     _uiState.update { it.copy(errorMsg = error.message ?:"데이터를 가져오지 못했습니다.", isLoading = false) }

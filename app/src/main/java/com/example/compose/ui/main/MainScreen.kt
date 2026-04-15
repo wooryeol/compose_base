@@ -14,7 +14,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
@@ -26,8 +29,18 @@ fun MainScreen(viewModel: MainViewModel) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+        Text(
+            text = "ComposeUI + MVVM",
+            fontSize = 30.sp,
+            fontWeight = FontWeight.Bold
+        )
+
+        Spacer(
+            modifier = Modifier.height(50.dp)
+        )
+
         Button(onClick = {viewModel.loadProfile() }) {
-            Text("프로필 조회")
+            Text("고양이에 대한 흥미로운 사실")
         }
 
         Spacer(
@@ -39,11 +52,12 @@ fun MainScreen(viewModel: MainViewModel) {
         } else {
             if (!state.errorMsg.isNullOrBlank()) {
                 Text(text = state.errorMsg ?: "" )
-            } else {state.profileData?.let {
-                Text(text = "이름: ${it.name}" )
-                Text(text = "나라: ${it.country}", style = MaterialTheme.typography.headlineSmall)
-            }
-            }
+            } else {state.factCatData?.let {
+                Text(
+                    text = it.fact,
+                    textAlign = TextAlign.Center
+                )
+            } }
         }
     }
 }

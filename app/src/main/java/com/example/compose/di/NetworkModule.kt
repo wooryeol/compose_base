@@ -1,10 +1,12 @@
 package com.example.compose.di
 
-import com.example.compose.data.remote.ProfileApi
+import com.example.compose.data.remote.FactCatApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -13,20 +15,30 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    private val BASE_URL = ""
+    // 고양이에 대한 흥미로운 사실 api
+    private val BASE_URL = "https://catfact.ninja/"
+    private val logging = HttpLoggingInterceptor().apply {
+        level = HttpLoggingInterceptor.Level.BODY
+    }
+
+
+    private val client = OkHttpClient.Builder()
+        .addInterceptor(logging)
+        .build()
 
     @Provides
     @Singleton
-    fun provideRetrofit(): Retrofit {
+    fun retrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
+            .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
     @Provides
     @Singleton
-    fun provideProfileApi(retrofit: Retrofit): ProfileApi {
-        return retrofit.create(ProfileApi::class.java)
+    fun getFactCat(retrofit: Retrofit): FactCatApi {
+        return retrofit.create(FactCatApi::class.java)
     }
 }

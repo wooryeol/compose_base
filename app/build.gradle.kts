@@ -1,4 +1,6 @@
-import com.android.tools.r8.internal.im
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 plugins {
     alias(libs.plugins.android.application)
@@ -19,7 +21,7 @@ android {
         applicationId = "com.example.compose"
         minSdk = 24
         targetSdk = 36
-        versionCode = 1
+        versionCode = 26041501
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -41,7 +43,36 @@ android {
 
     buildFeatures {
         compose = true
-        dataBinding = true
+        buildConfig = true
+    }
+
+    flavorDimensions += "env"
+
+    productFlavors {
+        create("dev") {
+            dimension = "env"
+            buildConfigField("String", "BASE_URL", "\"https://catfact.ninja/\"")
+        }
+
+        create("prod") {
+            dimension = "env"
+            buildConfigField("String", "BASE_URL", "\"https://catfact.ninja/\"")
+        }
+    }
+}
+
+androidComponents {
+    onVariants { variant ->
+        variant.outputs.forEach { output ->
+            val outputFileNameProperty = output.javaClass.getMethod("getOutputFileName").invoke(output) as? Property<String>
+            val flavorName = variant.flavorName
+            val versionName = output.versionName.get()
+            val formattedDate = SimpleDateFormat("yyMMdd", Locale.getDefault()).format(Date())
+
+            val finalName = "${formattedDate}-app-${flavorName}-v${versionName}.apk"
+
+            outputFileNameProperty?.set(finalName)
+        }
     }
 }
 
@@ -77,4 +108,8 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
     implementation(libs.hilt.navigation)
+
+    /* okhttp */
+    implementation (libs.okhttp)
+    implementation (libs.logging.interceptor)
 }
